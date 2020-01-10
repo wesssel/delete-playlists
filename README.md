@@ -1,5 +1,7 @@
 # umg-playlists-manager
 
+Simple application to delete playlist. https://deleteplaylists.com/
+
 ## Project setup
 ```
 yarn install
