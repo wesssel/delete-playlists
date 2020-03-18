@@ -1,4 +1,4 @@
-# umg-playlists-manager
+# Delete Playlists
 
 Simple application to delete playlist. https://deleteplaylists.com/
 
