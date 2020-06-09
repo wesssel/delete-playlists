@@ -1,8 +1,13 @@
 <template>
   <div id="app">
-    <h1>Delete Spotify Playlsits</h1>
+    <h1>Delete Spotify Playlists</h1>
+    <div>
+      <input type="text" placeholder="Type to filter" v-model="filterText"/>
+      <button @click="deleteAllPlaylists">Delete all</button>
+      <button @click="followAllPlaylists">Revert all</button>
+    </div>
     <ol>
-      <li v-for="playlist in playlists" :key="playlist.id">
+      <li v-for="playlist in playlistsFiltered" :key="playlist.id">
         <PlaylistItem
           :playlist="playlist"
           @delete="deletePlaylist(playlist)"
@@ -29,6 +34,16 @@ export default class App extends Vue {
   playlists: Playlist[] = []
   playlistsTotal: number = 0
   playlistsLimit: number = 50
+  filterText: string = ''
+
+  get playlistsFiltered (): Playlist[] {
+    if (this.filterText === '') {
+      return this.playlists
+    }
+    return this.playlists.filter(
+      playlist => playlist.name.toLowerCase().includes(this.filterText.toLowerCase())
+    )
+  }
 
   get playlistTotalPages (): number {
     return Math.ceil(this.playlistsTotal / this.playlistsLimit)
@@ -80,6 +95,26 @@ export default class App extends Vue {
 
         playlist.isUnfollowed = false
       })
+  }
+
+  deleteAllPlaylists () {
+    this.playlistsFiltered.forEach(
+      playlist => {
+        if (!playlist.isUnfollowed) {
+          this.deletePlaylist(playlist)
+        }
+      }
+    )
+  }
+
+  followAllPlaylists () {
+    this.playlistsFiltered.forEach(
+      playlist => {
+        if (playlist.isUnfollowed) {
+          this.followPlaylist(playlist)
+        }
+      }
+    )
   }
 }
 </script>
