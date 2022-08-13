@@ -3,6 +3,7 @@ export interface Playlist {
   id: string
   url: string
   isUnfollowed: boolean
+  total_tracks: number
 }
 
 export interface GetPlaylistsPayload {

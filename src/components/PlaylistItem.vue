@@ -3,7 +3,7 @@
     <button v-if="!playlist.isUnfollowed" @click="$emit('delete')">Delete</button>
     <button v-else @click="$emit('follow')">Revert</button>
     {{playlist.name}}
-    <a :href="playlist.url" target="_blank">{{playlist.id}}</a>
+    <a :href="playlist.url" target="_blank">{{playlist.id}}</a> -- Total Tracks: {{playlist.total_tracks}}
   </div>
 </template>
 

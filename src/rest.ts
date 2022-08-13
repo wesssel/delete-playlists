@@ -14,7 +14,8 @@ export function getPlaylists (token: string, offset: number, limit: number): Pro
         name: item.name,
         id: item.id,
         url: item.external_urls.spotify,
-        isUnfollowed: false
+        isUnfollowed: false,
+        total_tracks: item.tracks.total
       })),
       total: res.data.total
     }
